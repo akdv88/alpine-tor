@@ -30,6 +30,7 @@ RUN set -x \
                git \
                gmp-dev \
                go \
+               python \
                python-dev \
     && rm -rf /var/cache/apk/* \
     && echo "SocksPort 0.0.0.0:9050" > /etc/tor/torrc \
