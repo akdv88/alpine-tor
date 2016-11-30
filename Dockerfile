@@ -17,9 +17,9 @@ RUN set -x \
                libgmpxx \
                openssl \
                openssl-dev \
-               python-dev
-WORKDIR /tmp
-RUN wget $TOR_URL \
+               python-dev \
+    && cd /tmp \
+    && wget $TOR_URL \
     && tar xzvf $TOR_FILE \
     && cd $TOR_TEMP \
     && ./configure --prefix=/ --exec-prefix=/usr \
@@ -31,13 +31,11 @@ RUN wget $TOR_URL \
                gmp-dev \
                go \
                python-dev \
-    && rm -rf /var/cache/apk/*
-WORKDIR /etc/tor
-RUN echo "SocksPort 0.0.0.0:9050" > /etc/tor/torrc \
+    && rm -rf /var/cache/apk/* \
+    && echo "SocksPort 0.0.0.0:9050" > /etc/tor/torrc \
     && echo "ControlPort 0.0.0.0:9100" >> /etc/tor/torrc \
-    && echo "HashedControlPassword $(tor --hash-password testdrive | sed '1d')" >> /etc/tor/torrc
-
-RUN addgroup -g 20000 -S tord && adduser -u 20000 -G tord -S tord
+    && echo "HashedControlPassword $(tor --hash-password testdrive | sed '1d')" >> /etc/tor/torrc \
+    && addgroup -g 20000 -S tord && adduser -u 20000 -G tord -S tord
 
 #COPY ./torrc /etc/tor/torrc
 #COPY ./docker-entrypoint /docker-entrypoint
