@@ -36,7 +36,7 @@ RUN set -xe \
     && chown -Rv tord:tord /home/tord/
 
 COPY ./torrc /etc/tor/torrc
-COPY ./tor-entrypoint /tor-entrypoint
+COPY ./tor-entrypoint.sh /tor-entrypoint.sh
 
 RUN echo "HashedControlPassword $(tor --hash-password testdrive | sed '1d')" >> /etc/tor/torrc
 
@@ -46,4 +46,4 @@ RUN echo "HashedControlPassword $(tor --hash-password testdrive | sed '1d')" >> 
 EXPOSE 9050 9100
 
 
-ENTRYPOINT ["/tor-entrypoint"]
+ENTRYPOINT ["/tor-entrypoint.sh"]
