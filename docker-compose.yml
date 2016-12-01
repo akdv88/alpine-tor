@@ -1,0 +1,9 @@
+server:
+  image: akdv88/alpine-tor
+  ports:
+    - "9050:9050"
+    - "9100:9100"
+#  volumes:
+#    - ./torrc:/etc/tor/torrc
+#    - ./secret_id_key:/home/tord/.tor/keys/secret_id_key
+  restart: always
