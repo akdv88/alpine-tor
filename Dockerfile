@@ -38,7 +38,8 @@ RUN set -xe \
 COPY ./torrc /etc/tor/torrc
 COPY ./tor-entrypoint.sh /tor-entrypoint.sh
 
-RUN echo "HashedControlPassword $(tor --hash-password testdrive | sed '1d')" >> /etc/tor/torrc
+RUN chmod 755 /tor-entrypoint.sh
+     && echo "HashedControlPassword $(tor --hash-password testdrive | sed '1d')" >> /etc/tor/torrc
 
 #VOLUME /etc/tor /home/tord/.tor
 
