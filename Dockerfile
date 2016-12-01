@@ -36,7 +36,7 @@ RUN set -xe \
     && addgroup -g 20000 -S tord && adduser -u 20000 -G tord -S tord
 
 COPY ./torrc /etc/tor/torrc
-COPY ./tor-entrypoint /docker-entrypoint
+COPY ./tor-entrypoint /tor-entrypoint
 
 RUN echo "HashedControlPassword $(tor --hash-password testdrive | sed '1d')" >> /etc/tor/torrc
 
