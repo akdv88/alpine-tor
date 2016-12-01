@@ -32,7 +32,7 @@ RUN set -xe \
                go \
                python-dev \
     && rm -rf /var/cache/apk/* \
-
+    && chown -Rv tord:tord /home/tord/ \
     && addgroup -g 20000 -S tord && adduser -u 20000 -G tord -S tord
 
 COPY ./torrc /etc/tor/torrc
