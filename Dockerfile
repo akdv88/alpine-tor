@@ -32,8 +32,8 @@ RUN set -xe \
                go \
                python-dev \
     && rm -rf /var/cache/apk/* \
-    && chown -Rv tord:tord /home/tord/ \
-    && addgroup -g 20000 -S tord && adduser -u 20000 -G tord -S tord
+    && addgroup -g 20000 -S tord && adduser -u 20000 -G tord -S tord \
+    && chown -Rv tord:tord /home/tord/
 
 COPY ./torrc /etc/tor/torrc
 COPY ./tor-entrypoint /tor-entrypoint
