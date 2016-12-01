@@ -3,16 +3,37 @@
 http="http:\/\/.*"
 https="https:\/\/.*"
 pac="tor-proxy.pac"
+dir="/tmp/output"
+list="/tmp/curl-list"
 
-(
-  echo -e "Generated at $(date)\n\nfunction FindProxyForURL(url, host) {" > $pac
-
-  curl http://api.antizapret.info/all.php \
+curl http://api.antizapret.info/all.php \
 | sed 's/^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9];//g; s/^;//g; s/;.*$//g; s/^.*http:\/\//http:\/\//g; s/^.*https:\/\//https:\/\//g; /^$/d' \
-| tr '[:upper:]' '[:lower:]' \
-| while read line; do echo "$line" >> $pac; done
-#echo " if (shExpMatch(url, \"$line\")) return \"SOCKS 192.168.1.155:9050\";"
-  echo '        }'
-) > /dev/null 2>&1
+| tr '[:upper:]' '[:lower:]' > $list
 
-# shExpMatch must to be corrected
+# http
+grep -E "^http:" $list > $dir/http \
+        && sed -i '/^http:/d' $list \
+        && sed -i 's/^http:\/\/www[0-9]*\./\*/g; s/^http:\/\//\*/g; s/\/.*//g; s/$/\*/g' $dir/http > $dir/out-list \
+        && rm $dir/http
+
+# https
+grep -E "^https:" $list > $dir/https \
+        && sed -i '/^https:/d' $list \
+        && sed -i 's/^https:\/\/www[0-9]*\./\*/g; s/^https:\/\//\*/g; s/\/.*//g; s/$/\*/g' $dir/https >> $dir/out-list \
+        && rm $dir/https
+
+# asterisk
+grep -E "^\*" $list > $dir/asterisk \
+        && sed -i '/^\*/d' $list \
+        && sed 's/^\*\./\*/g; s/$/\*/g' $dir/asterisk >> $dir/out-list \
+        && rm $dir/asterisk
+
+# comma
+grep -E ',' $list > $dir/comma && sed -i '/,/d' $list \
+        && cat output/comma | tr "," "\n" | sed 's/^newcamd525:\/\//\*/g; s/:[0-9]*$/\*/g' >> $dir/out-list \
+        && rm $dir/comma
+
+# simple
+mv $list $dir/simple \
+        && sed 's/^/\*/g; s/$/\*/g' $dir/simple >> $dir/out-list \
+        && rm $dir/simple
