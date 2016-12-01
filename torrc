@@ -1,0 +1,5 @@
+User tord
+DataDirectory /home/tord/.tor
+
+SocksPort 0.0.0.0:9050
+ControlPort 0.0.0.0:9100
