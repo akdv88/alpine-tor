@@ -9,7 +9,7 @@ ENV TOR_FILE tor-$TOR_VER.tar.gz
 ENV TOR_URL https://dist.torproject.org/$TOR_FILE
 ENV TOR_TEMP tor-$TOR_VER
 
-RUN set -x \
+RUN set -xe \
     && apk add -U build-base \
                gmp-dev \
                libevent \
@@ -32,18 +32,18 @@ RUN set -x \
                go \
                python-dev \
     && rm -rf /var/cache/apk/* \
-    && echo "SocksPort 0.0.0.0:9050" > /etc/tor/torrc \
-    && echo "ControlPort 0.0.0.0:9100" >> /etc/tor/torrc \
-    && echo "HashedControlPassword $(tor --hash-password testdrive | sed '1d')" >> /etc/tor/torrc \
+
     && addgroup -g 20000 -S tord && adduser -u 20000 -G tord -S tord
 
-#COPY ./torrc /etc/tor/torrc
-#COPY ./docker-entrypoint /docker-entrypoint
+COPY ./torrc /etc/tor/torrc
+COPY ./tor-entrypoint /docker-entrypoint
+
+RUN echo "HashedControlPassword $(tor --hash-password testdrive | sed '1d')" >> /etc/tor/torrc
 
 #VOLUME /etc/tor /home/tord/.tor
 
 # SocksPort, ControlPort
 EXPOSE 9050 9100
 
-USER tord
-ENTRYPOINT ["tor"]
+
+ENTRYPOINT ["/tor-entrypoint"]
