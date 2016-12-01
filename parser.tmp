@@ -1,0 +1,16 @@
+#!/bin/sh
+
+http="http:\/\/.*"
+https="https:\/\/.*"
+
+cat $1 | while read line; do
+
+if expr "$line" : "$http"; then
+        echo $line >> http-test-out
+elif expr "$line" : "$https"; then
+        echo $line >> https-test-out
+else
+        echo $line >> empty-test-out
+fi
+
+done
