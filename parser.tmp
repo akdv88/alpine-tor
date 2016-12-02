@@ -2,39 +2,39 @@
 
 http="http:\/\/.*"
 https="https:\/\/.*"
-pac="tor-proxy.pac"
 dir="/tmp"
-list="/tmp/curl-list"
+inlist="$dir/curl-list"
+outlist="$dir/out-list"
+pac="$dir/tor-proxy.pac"
 
 curl http://api.antizapret.info/all.php \
 | sed 's/^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9];//g; s/^;//g; s/;.*$//g; s/^.*http:\/\//http:\/\//g; s/^.*https:\/\//https:\/\//g; /^$/d' \
-| tr '[:upper:]' '[:lower:]' > $list
+| tr '[:upper:]' '[:lower:]' > $inlist
 
 # http
-grep -E "^http:" $list > $dir/http \
-        && sed -i '/^http:/d' $list \
-        && sed -i 's/^http:\/\/www[0-9]*\./\*/g; s/^http:\/\//\*/g; s/\/.*//g; s/$/\*/g' $dir/http > $dir/out-list \
-        && rm $dir/http
+grep -E "^http:" $inlist \
+        | sed 's/^http:\/\/www[0-9]*\./\*/g; s/^http:\/\//\*/g; s/\/.*//g; s/$/\*/g' > $outlist \
+        && sed -i '/^http:/d' $inlist
 
 # https
-grep -E "^https:" $list > $dir/https \
-        && sed -i '/^https:/d' $list \
-        && sed -i 's/^https:\/\/www[0-9]*\./\*/g; s/^https:\/\//\*/g; s/\/.*//g; s/$/\*/g' $dir/https >> $dir/out-list \
-        && rm $dir/https
+grep -E "^https:" $inlist \
+        | sed 's/^https:\/\/www[0-9]*\./\*/g; s/^https:\/\//\*/g; s/\/.*//g; s/$/\*/g' >> $outlist \
+        && sed -i '/^https:/d' $inlist
 
 # asterisk
-grep -E "^\*" $list > $dir/asterisk \
-        && sed -i '/^\*/d' $list \
-        && sed 's/^\*\./\*/g; s/$/\*/g' $dir/asterisk >> $dir/out-list \
-        && rm $dir/asterisk
+grep -E "^\*" $inlist \
+        | sed 's/^\*\./\*/g; s/$/\*/g' >> $outlist \
+        && sed -i '/^\*/d' $inlist
 
 # comma
-grep -E ',' $list > $dir/comma \
-        && sed -i '/,/d' $list \
-        && cat $dir/comma | tr "," "\n" | sed 's/^newcamd525:\/\//\*/g; s/:[0-9]*$/\*/g' >> $dir/out-list \
-        && rm $dir/comma
+grep -E ',' $inlist | tr "," "\n" \
+        | sed 's/^newcamd525:\/\//\*/g; s/:[0-9]*$/\*/g' >> $outlist \
+        && sed -i '/,/d' $inlist
 
 # simple
-mv $list $dir/simple \
-        && sed 's/^www[0-9]*//g; s/^/\*/g; s/$/\*/g' $dir/simple >> $dir/out-list \
-        && rm $dir/simple
+sed 's/^www[0-9]*//g; s/^/\*/g; s/$/\*/g' $inlist >> $outlist \
+        && rm $inlist
+
+# duplicates
+sort -u out-list | sort -d -o $pac \
+        && rm $outlist
