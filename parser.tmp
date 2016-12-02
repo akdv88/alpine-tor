@@ -3,7 +3,7 @@
 http="http:\/\/.*"
 https="https:\/\/.*"
 pac="tor-proxy.pac"
-dir="/tmp/output"
+dir="/tmp"
 list="/tmp/curl-list"
 
 curl http://api.antizapret.info/all.php \
@@ -29,11 +29,12 @@ grep -E "^\*" $list > $dir/asterisk \
         && rm $dir/asterisk
 
 # comma
-grep -E ',' $list > $dir/comma && sed -i '/,/d' $list \
-        && cat output/comma | tr "," "\n" | sed 's/^newcamd525:\/\//\*/g; s/:[0-9]*$/\*/g' >> $dir/out-list \
+grep -E ',' $list > $dir/comma \
+        && sed -i '/,/d' $list \
+        && cat $dir/comma | tr "," "\n" | sed 's/^newcamd525:\/\//\*/g; s/:[0-9]*$/\*/g' >> $dir/out-list \
         && rm $dir/comma
 
 # simple
 mv $list $dir/simple \
-        && sed 's/^/\*/g; s/$/\*/g' $dir/simple >> $dir/out-list \
+        && sed 's/^www[0-9]*//g; s/^/\*/g; s/$/\*/g' $dir/simple >> $dir/out-list \
         && rm $dir/simple
