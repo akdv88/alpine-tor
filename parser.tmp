@@ -32,9 +32,15 @@ grep -E ',' $inlist | tr "," "\n" \
         && sed -i '/,/d' $inlist
 
 # simple
-sed 's/^www[0-9]*//g; s/^/\*/g; s/$/\*/g' $inlist >> $outlist \
+sed 's/^www[0-9]*\.//g; s/^/\*/g; s/$/\*/g' $inlist >> $outlist \
         && rm $inlist
 
-# duplicates
-sort -u out-list | sort -d -o $pac \
+#tor-proxy.pac
+echo -e 'function FindProxyForURL(url, host) {\n\turl = url.toLowerCase();' > $pac \
+        && sort -u out-list | sort -d \
+        | while read line
+          do
+                echo -e "\tif (shExpMatch(url, \"$line\")) return \"SOCKS 127.0.0.1:9050\";" >> $pac
+          done \
+        && echo "}" >> $pac \
         && rm $outlist
