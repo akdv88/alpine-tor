@@ -1,5 +1,6 @@
 #!/bin/sh
-
+# Remove cyrillyc
+# Change shexp to "dnsdomainis, host"
 http="http:\/\/.*"
 https="https:\/\/.*"
 dir="/tmp"
