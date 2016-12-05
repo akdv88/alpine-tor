@@ -1,6 +1,5 @@
 #!/bin/sh
-http="http:\/\/.*"
-https="https:\/\/.*"
+
 dir="/tmp"
 inlist="$dir/curl-list"
 outlist="$dir/out-list"
