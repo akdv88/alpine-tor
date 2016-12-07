@@ -5,7 +5,7 @@ ENV TOR_TEMP tor-$TOR_VER
 
 RUN set -xe \
     && apk add -U curl \
-               libidn \
+                  libidn
 
 EXPOSE 80
 
