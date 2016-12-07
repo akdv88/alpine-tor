@@ -1,4 +1,7 @@
 #!/bin/sh
+# Shell script to make PAC file to proxify Russian blocked sites.
+# It uses only dnsDomainIs function to parse.
+# Works with Crome and Firefox browsers.
 
 dir="/tmp"
 inlist="$dir/curl-list"
