@@ -1,4 +1,8 @@
 #!/bin/sh
+# Shell script to make PAC file to proxify Russian blocked sites with two functions inside:
+# shExpMatch for urls and dnsDomainIs for domains. However, it seems that generated PAC file doesn't work with any popular browsers,
+# such as Firefox or Chrome - both giving errors related to memory.
+# Although this file is correct, but now it's useless.
 
 dir="/tmp"
 inlist="$dir/curl-list"
