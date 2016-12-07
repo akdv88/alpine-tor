@@ -1,7 +1,7 @@
 FROM alpine
 MAINTAINER Shlomo shabbat@gmail.com
 
-ENV TOR_TEMP tor-$TOR_VER
+#ENV TOR_TEMP tor-$TOR_VER
 
 RUN set -xe \
     && apk add -U curl \
