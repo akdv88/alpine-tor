@@ -8,6 +8,7 @@ sort="$dir/sort-list"
 url="$dir/url-list"
 dns="$dir/dns-list"
 pac="$dir/tor-proxy.pac"
+proxy="SOCKS 127.0.0.1:9050"
 
 clear \
 && echo -ne "\nDownloading full banned list..." \
@@ -65,7 +66,7 @@ clear \
 		echo -ne "\e[0K\rMaking PAC file...$(wc -l $pac | grep -Eo "[0-9]*") lines writed"
 	   done \
 	&& sed -i '$s/\s||/)/g' $pac \
-	&& echo -e "\treturn \"SOCKS 127.0.0.1:9050\";\n" >> $pac \
+	&& echo -e "\treturn \"$proxy\";\n" >> $pac \
 	&& rm $url \
 	&& echo -e "\tif (dnsDomainIs(host, \"$(head -n 1 $dns)\") ||" >> $pac \
 	&& sed -i '1d' $dns \
@@ -75,7 +76,7 @@ clear \
 		echo -ne "\e[0K\rMaking PAC file...$(wc -l $pac | grep -Eo "[0-9]*") lines writed"
 	  done \
 	&& sed -i '$s/\s||/)/g' $pac \
-	&& echo -e "\treturn \"SOCKS 127.0.0.1:9050\";\n" >> $pac \
+	&& echo -e "\treturn \"$proxy\";\n" >> $pac \
 	&& rm $dns \
 	&& echo "}" >> $pac \
 	&& echo -e "Done\n$(wc -l $pac | grep -Eo "[0-9]*") lines writed to $pac\n" \
