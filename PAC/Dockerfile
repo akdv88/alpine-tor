@@ -3,7 +3,7 @@ MAINTAINER Shlomo shabbat@gmail.com
 
 #ENV TOR_TEMP tor-$TOR_VER
 
-COPY dnspacmaker.sh /tmp
+COPY dnspacmaker.sh /tmp/dnspacmaker.sh
 
 RUN set -xe \
     && apk add -U curl \
