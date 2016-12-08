@@ -2,6 +2,7 @@ FROM alpine
 MAINTAINER Shlomo shabbat@gmail.com
 
 ENV UPDATE_TIME 12h
+ENV STORAGE /pac
 
 COPY pac-entrypoint.sh /pac-entrypoint.sh
 COPY dnspacmaker.sh $dir/dnspacmaker.sh
