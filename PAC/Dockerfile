@@ -1,17 +1,16 @@
 FROM alpine
 MAINTAINER Shlomo shabbat@gmail.com
 
-ENV dir /tmp
+ENV UPDATE_TIME 12h
 
+COPY entrypoint.sh /entrypoint.sh
 COPY dnspacmaker.sh $dir/dnspacmaker.sh
 
 RUN set -xe \
     && apk add -U curl \
                   libidn \
-    && chmod +x /tmp/dnspacmaker.sh \
-    && .$dir/dnspacmaker.sh \
+    && chmod +x /entrypoint.sh \
+    && chmod +x /dnspacmaker.sh \
     && rm -rf /var/cache/apk/*
-    
-EXPOSE 80
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/entrypoint.sh"]
