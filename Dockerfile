@@ -10,7 +10,7 @@ ENV TOR_URL https://dist.torproject.org/$TOR_FILE
 ENV TOR_TEMP tor-$TOR_VER
 
 RUN set -xe \
-    && apk add -U build-base \
+    && apk add --no-cache build-base \
                gmp-dev \
                libevent \
                libevent-dev \
@@ -31,7 +31,6 @@ RUN set -xe \
                gmp-dev \
                go \
                python-dev \
-    && rm -rf /var/cache/apk/* \
     && addgroup -g 20000 -S tord && adduser -u 20000 -G tord -S tord \
     && chown -Rv tord:tord /home/tord/
 
