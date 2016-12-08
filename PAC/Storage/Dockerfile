@@ -1,4 +1,4 @@
-FROM alpine
+FROM busybox
 MAINTAINER Shlomo shabbat@gmail.com
 
 VOLUME /pac
