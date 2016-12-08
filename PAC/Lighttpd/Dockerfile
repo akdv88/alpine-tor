@@ -4,8 +4,7 @@ MAINTAINER Shlomo shabbat@gmail.com
 #ENV TOR_ENV production
 
 RUN set -xe \
-    && apk add -U lighttpd \
-    && rm -rf /var/cache/apk/*
+    && apk add --no-cache lighttpd
 
 COPY lighttpd.conf /etc/lighttpd/lighttpd.conf
 COPY default.html /pac/default.html
