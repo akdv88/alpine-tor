@@ -9,8 +9,9 @@ RUN set -xe \
     && apk add -U curl \
                   libidn \
     && chmod +x /tmp/dnspacmaker.sh \
-    && .$dir/dnspacmaker.sh
-
+    && .$dir/dnspacmaker.sh \
+    && rm -rf /var/cache/apk/*
+    
 EXPOSE 80
 
 ENTRYPOINT ["/bin/bash"]
