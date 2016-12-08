@@ -2,4 +2,6 @@
 
 set -e
 
-exec lighttpd -f /etc/lighttpd/lighttpd.conf
+ln -s /pac /var/www/localhost/
+
+exec lighttpd -D -f /etc/lighttpd/lighttpd.conf
