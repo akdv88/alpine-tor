@@ -11,6 +11,8 @@ COPY lighttpd.conf /etc/lighttpd/lighttpd.conf
 COPY default.html /pac/default.html
 COPY lighttpd-entrypoint.sh /lighttpd-entrypoint.sh
 
+RUN chmod +x /lighttpd-entrypoint.sh
+
 EXPOSE 80
 
 ENTRYPOINT ["/lighttpd-entrypoint.sh"]
