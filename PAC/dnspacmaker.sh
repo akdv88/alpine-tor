@@ -57,7 +57,7 @@ proxy="SOCKS 127.0.0.1:9050"
 	&& sed -i '1d' $sort \
 	&& sed -e 's/^/\tdnsDomainIs(host, \"/g; s/$/\") \|\|/g' $sort >> $pac \
 	&& sed -i '$s/\s||/)/g' $pac \
-	&& echo -e "\treturn \"$proxy\";\n" >> $pac \
+	&& echo -e "\treturn \"$proxy\";" >> $pac \
 	&& rm $sort \
 	&& echo "}" >> $pac \
 	&& echo -e "Done\n\n\t$(wc -l $pac | grep -Eo "[0-9]*") lines writed to $pac\n" \
