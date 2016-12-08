@@ -1,7 +1,7 @@
 FROM alpine
 MAINTAINER Shlomo shabbat@gmail.com
 
-ENV UPDATE_TIME 12h
+ENV UPDATE_TIME 1m
 ENV STORAGE /pac
 
 COPY pac-entrypoint.sh /pac-entrypoint.sh
