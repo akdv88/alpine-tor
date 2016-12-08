@@ -8,10 +8,9 @@ COPY pac-entrypoint.sh /pac-entrypoint.sh
 COPY dnspacmaker.sh $dir/dnspacmaker.sh
 
 RUN set -xe \
-    && apk add -U curl \
+    && apk add --no-cache curl \
                   libidn \
     && chmod +x /pac-entrypoint.sh \
-    && chmod +x /dnspacmaker.sh \
-    && rm -rf /var/cache/apk/*
+    && chmod +x /dnspacmaker.sh
 
 ENTRYPOINT ["/pac-entrypoint.sh"]
