@@ -1,5 +1,6 @@
 #!/bin/sh
-while :; do
-  exec /dnspacmaker.sh
-  sleep 20
+while true
+do
+  /bin/sh dnspacmaker.sh
+  sleep $UPDATE_TIME
 done
