@@ -8,6 +8,7 @@ RUN set -xe \
     && rm -rf /var/cache/apk/*
 
 COPY lighttpd.conf /etc/lighttpd/lighttpd.conf
+COPY default.html /pac/default.html
 COPY lighttpd-entrypoint.sh /lighttpd-entrypoint.sh
 
 EXPOSE 80
