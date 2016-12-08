@@ -8,7 +8,7 @@ inlist="$dir/curl-list"
 outlist="$dir/out-list"
 idnlist="$dir/idn-list"
 sort="$dir/sort-list"
-pac="$dir/tor-proxy.pac"
+pac="$STORAGE/tor-proxy.pac"
 proxy="SOCKS 127.0.0.1:9050"
 
    echo -ne "\nDownloading full banned list..." \
