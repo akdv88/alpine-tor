@@ -1,15 +1,15 @@
 FROM alpine
 MAINTAINER Shlomo shabbat@gmail.com
 
-#ENV TOR_TEMP tor-$TOR_VER
+ENV dir /tmp
 
-COPY dnspacmaker.sh /tmp/dnspacmaker.sh
+COPY dnspacmaker.sh $dir/dnspacmaker.sh
 
 RUN set -xe \
     && apk add -U curl \
                   libidn \
     && chmod +x /tmp/dnspacmaker.sh \
-    && ./dnspacmaker.sh
+    && .$dir/dnspacmaker.sh
 
 EXPOSE 80
 
