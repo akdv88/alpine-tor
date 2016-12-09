@@ -10,6 +10,7 @@ cat << EOF > /var/www/localhost/pac/default.html
 <body>
 
 <h1>Tor Proxy Pac</h1>
+<h4>Type http://address/tor-proxy.pac to recieve PAC file</h4>
 
 </body>
 </html>
