@@ -1,8 +1,6 @@
 FROM alpine
 MAINTAINER Shlomo shabbat@gmail.com
 
-#ENV TOR_ENV production
-
 RUN set -xe \
     && apk add --no-cache lighttpd
 
