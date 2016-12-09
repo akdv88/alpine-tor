@@ -16,5 +16,5 @@ cat << EOF > /var/www/localhost/pac/default.html
 </html>
 EOF
 
-cat < /tmp/logpipe 1>&2 &
+cat < /tmp/log 1>&2 &
 exec lighttpd -D -f /etc/lighttpd/lighttpd.conf 2>&1
