@@ -9,7 +9,7 @@ outlist="$dir/out-list"
 idnlist="$dir/idn-list"
 sort="$dir/sort-list"
 pac="$STORAGE/tor-proxy.pac"
-proxy="SOCKS 127.0.0.1:9050"
+proxy="$PROXY"
 
    echo -ne "\nDownloading full banned list..." \
 	&& curl -s http://api.antizapret.info/all.php \
