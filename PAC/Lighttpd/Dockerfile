@@ -3,8 +3,8 @@ MAINTAINER Shlomo shabbat@gmail.com
 
 RUN set -xe \
     && apk add --no-cache lighttpd \
-    && chown lighttpd:lighttpd /dev/stderr \
-    && chmod 777 /dev/stderr
+    && mkfifo -m 600 /tmp/log
+    && chown lighttpd:lighttpd /tmp/log
 
 COPY lighttpd.conf /etc/lighttpd/lighttpd.conf
 COPY lighttpd-entrypoint.sh /lighttpd-entrypoint.sh
