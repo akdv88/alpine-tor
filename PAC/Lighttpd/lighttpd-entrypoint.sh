@@ -15,4 +15,4 @@ cat << EOF > /var/www/localhost/pac/default.html
 </html>
 EOF
 
-exec lighttpd -D -f /etc/lighttpd/lighttpd.conf
+exec lighttpd -D -f /etc/lighttpd/lighttpd.conf 2>&1
