@@ -3,6 +3,7 @@ MAINTAINER Shlomo shabbat@gmail.com
 
 ENV UPDATE_TIME 12h
 ENV STORAGE /pac
+ENV PROXY SOCKS 127.0.0.1:9050
 
 COPY pac-entrypoint.sh /pac-entrypoint.sh
 COPY dnspacmaker.sh $dir/dnspacmaker.sh
