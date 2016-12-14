@@ -6,7 +6,7 @@ services:
     ports:
       - "9050:9050"
       - "9100:9100"
-    mem_limit: 40000000
+    mem_limit: 50000000
     restart: always
   pacmaker:
     image: "akdv88/alpine-tor:pacmaker"
@@ -15,7 +15,7 @@ services:
       - torclient
     volumes:
       - pac:/pac
-    mem_limit: 5000000
+    mem_limit: 80000000
     restart: always
   lighttpd:
     image: "akdv88/alpine-tor:lighttpd"
@@ -26,7 +26,7 @@ services:
       - "80:80"
     volumes:
       - pac:/pac
-    mem_limit: 6000000
+    mem_limit: 10000000
     restart: always
 volumes:
   pac:
