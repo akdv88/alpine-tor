@@ -1,9 +1,29 @@
-server:
-  image: akdv88/alpine-tor
-  ports:
-    - "9050:9050"
-    - "9100:9100"
-#  volumes:
-#    - ./torrc:/etc/tor/torrc
-#    - ./secret_id_key:/home/tord/.tor/keys/secret_id_key
-  restart: always
+version: '2'
+services:
+  torclient:
+    image: "akdv88/alpine-tor:torclient"
+    container_name: torclient
+    ports:
+      - "9050:9050"
+      - "9100:9100"
+    restart: always
+  pacmaker:
+    image: "akdv88/alpine-tor:pacmaker"
+    container_name: pacmaker
+    depends_on:
+      - torclient
+    volumes:
+      - pac:/pac
+    restart: always
+  lighttpd:
+    image: "akdv88/alpine-tor:lighttpd"
+    container_name: lighttpd
+    depends_on:
+      - pacmaker
+    ports:
+      - "80:80"
+    volumes:
+      - pac:/pac
+    restart: always
+volumes:
+  pac:
