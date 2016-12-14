@@ -2,7 +2,7 @@
 
 set -e
 
-ln -s /pac /var/www/localhost/
+ln -sf /pac /var/www/localhost/ 
 
 cat << EOF > /var/www/localhost/pac/default.html
 <!DOCTYPE html>
